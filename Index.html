@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scuderia Command v1.1.0 Beta</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,sans-serif;
+}
+
+body{
+
+background:#090909;
+color:white;
+
+}
+
+header{
+
+background:#111;
+border-bottom:4px solid #E10600;
+padding:20px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.logo{
+
+font-size:28px;
+font-weight:700;
+color:#E10600;
+
+}
+
+.timer{
+
+font-size:22px;
+
+}
+
+.dashboard{
+
+display:grid;
+
+grid-template-columns:
+
+320px
+1fr
+340px;
+
+gap:18px;
+
+padding:20px;
+
+}
+
+.card{
+
+background:#171717;
+
+border-radius:14px;
+
+padding:16px;
+
+border:1px solid #2f2f2f;
+
+box-shadow:0 0 18px rgba(0,0,0,.45);
+
+}
+
+.card h2{
+
+margin-bottom:12px;
+color:#E10600;
+
+}
+
+@media(max-width:900px){
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+🏎 Scuderia Command
+
+</div>
+
+<div class="timer">
+
+<span id="raceTimer">
+
+00:00:00
+
+</span>
+
+</div>
+
+</header>
+
+<div class="dashboard">
+
+<div class="card">
+
+<h2>Timing Tower</h2>
+
+<div id="tower">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Telemetry</h2>
+
+<div id="telemetry">
+
+Speed --
+<br><br>
+
+RPM --
+
+<br><br>
+
+Gear --
+
+<br><br>
+
+Throttle --
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Race Control</h2>
+
+<div id="raceControl">
+
+Waiting...
+
+</div>
+
+<br>
+
+<h2>Team Radio</h2>
+
+<div id="radio">
+
+Waiting...
+
+</div>
+
+</div>
+
+</div><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scuderia Command v1.1.0 Beta</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,sans-serif;
+}
+
+body{
+
+background:#090909;
+color:white;
+
+}
+
+header{
+
+background:#111;
+border-bottom:4px solid #E10600;
+padding:20px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.logo{
+
+font-size:28px;
+font-weight:700;
+color:#E10600;
+
+}
+
+.timer{
+
+font-size:22px;
+
+}
+
+.dashboard{
+
+display:grid;
+
+grid-template-columns:
+
+320px
+1fr
+340px;
+
+gap:18px;
+
+padding:20px;
+
+}
+
+.card{
+
+background:#171717;
+
+border-radius:14px;
+
+padding:16px;
+
+border:1px solid #2f2f2f;
+
+box-shadow:0 0 18px rgba(0,0,0,.45);
+
+}
+
+.card h2{
+
+margin-bottom:12px;
+color:#E10600;
+
+}
+
+@media(max-width:900px){
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+🏎 Scuderia Command
+
+</div>
+
+<div class="timer">
+
+<span id="raceTimer">
+
+00:00:00
+
+</span>
+
+</div>
+
+</header>
+
+<div class="dashboard">
+
+<div class="card">
+
+<h2>Timing Tower</h2>
+
+<div id="tower">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Telemetry</h2>
+
+<div id="telemetry">
+
+Speed --
+<br><br>
+
+RPM --
+
+<br><br>
+
+Gear --
+
+<br><br>
+
+Throttle --
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Race Control</h2>
+
+<div id="raceControl">
+
+Waiting...
+
+</div>
+
+<br>
+
+<h2>Team Radio</h2>
+
+<div id="radio">
+
+Waiting...
+
+</div>
+
+</div>
+
+</div>
+<script>
+
+let seconds = 0;
+
+const timer = document.getElementById("raceTimer");
+const telemetry = document.getElementById("telemetry");
+const raceControl = document.getElementById("raceControl");
+const radio = document.getElementById("radio");
+const tower = document.getElementById("tower");
+
+const drivers = [
+["1","LEC","+0.000"],
+["2","HAM","+1.482"],
+["3","VER","+3.244"],
+["4","NOR","+5.118"],
+["5","PIA","+6.404"],
+["6","RUS","+8.115"],
+["7","ALO","+10.778"],
+["8","ANT","+12.144"]
+];
+
+function updateTower(){
+
+let html="";
+
+drivers.forEach(d=>{
+
+html += `
+<div style="
+display:flex;
+justify-content:space-between;
+padding:8px;
+border-bottom:1px solid #333;
+">
+<span>P${d[0]}</span>
+<span>${d[1]}</span>
+<span>${d[2]}</span>
+</div>
+`;
+
+});
+
+tower.innerHTML = html;
+
+}
+
+updateTower();
+
+const rcMessages=[
+
+"Track Clear",
+
+"Yellow Flag Sector 2",
+
+"DRS Enabled",
+
+"Virtual Safety Car",
+
+"Pit Lane Open"
+
+];
+
+const radioMessages=[
+
+"Push now",
+
+"Recharge",
+
+"Box this lap",
+
+"Target plus three",
+
+"Tyre management"
+
+];
+
+setInterval(()=>{
+
+seconds++;
+
+const h=String(Math.floor(seconds/3600)).padStart(2,"0");
+const m=String(Math.floor(seconds%3600/60)).padStart(2,"0");
+const s=String(seconds%60).padStart(2,"0");
+
+timer.textContent=`${h}:${m}:${s}`;
+
+const speed=270+Math.floor(Math.random()*60);
+
+const rpm=10000+Math.floor(Math.random()*2200);
+
+const gear=5+Math.floor(Math.random()*4);
+
+const throttle=Math.floor(Math.random()*100);
+
+telemetry.innerHTML=`
+
+<b>Speed</b> ${speed} km/h
+
+<br><br>
+
+<b>RPM</b> ${rpm}
+
+<br><br>
+
+<b>Gear</b> ${gear}
+
+<br><br>
+
+<b>Throttle</b> ${throttle}%
+
+`;
+
+raceControl.textContent=
+rcMessages[Math.floor(Math.random()*rcMessages.length)];
+
+radio.textContent=
+radioMessages[Math.floor(Math.random()*radioMessages.length)];
+
+},1000);
+
+</script>
+
+</body>
+
+</html>
