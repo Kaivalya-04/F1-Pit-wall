@@ -1,1 +1,175 @@
+/* ===============================
+   Scuderia Command v1.2.0
+   Sprint 4 - Mission Control
+================================ */
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
+}
+
+body{
+
+    background:#0b0b0b;
+    color:white;
+
+    background-image:
+    radial-gradient(circle at top,#222 0%,#0b0b0b 60%);
+
+}
+
+.topbar{
+
+    height:80px;
+
+    background:#111;
+
+    border-bottom:4px solid #E10600;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 20px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+}
+
+.logo{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:#E10600;
+
+}
+
+.session{
+
+    text-align:center;
+
+}
+
+.session h2{
+
+    font-size:20px;
+
+}
+
+.session p{
+
+    color:#bbbbbb;
+
+    margin-top:4px;
+
+}
+
+.clock{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:#ffffff;
+
+}
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:320px 1fr 340px;
+
+    gap:20px;
+
+    padding:20px;
+
+}
+
+#timingTower{
+
+    background:#161616;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    min-height:700px;
+
+    border:1px solid #333;
+
+}
+
+.centerPanel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.rightPanel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.card{
+
+    background:#171717;
+
+    border:1px solid #303030;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    box-shadow:0 0 15px rgba(0,0,0,.4);
+
+}
+
+.card h2{
+
+    color:#E10600;
+
+    margin-bottom:12px;
+
+}
+
+@media(max-width:1200px){
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+.topbar{
+
+flex-direction:column;
+
+height:auto;
+
+padding:15px;
+
+gap:10px;
+
+}
+
+}
