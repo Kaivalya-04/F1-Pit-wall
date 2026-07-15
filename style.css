@@ -1,0 +1,126 @@
+/* =====================================
+   Scuderia Command v2.0.0
+   Sprint 1 - Mission Control Theme
+===================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+    background:#0b0b0b;
+    color:#ffffff;
+
+}
+
+.header{
+
+    height:80px;
+
+    background:#111111;
+
+    border-bottom:4px solid #E10600;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 20px;
+
+}
+
+.logo{
+
+    color:#E10600;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+}
+
+.session{
+
+    text-align:center;
+
+}
+
+.session h1{
+
+    font-size:24px;
+
+}
+
+.session p{
+
+    color:#bbbbbb;
+
+    margin-top:5px;
+
+}
+
+.clock{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+}
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:320px 1fr 320px;
+
+    gap:20px;
+
+    padding:20px;
+
+}
+
+.timingTower{
+
+    background:#171717;
+
+    border:1px solid #333333;
+
+    border-radius:12px;
+
+    padding:15px;
+
+}
+
+.centerPanel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.rightPanel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.card{
+
+    background:#171717;
+
+    border:1px solid #333333;
+
+    border-radius
