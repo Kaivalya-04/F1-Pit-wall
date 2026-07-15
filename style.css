@@ -1,159 +1,19 @@
-/* =====================================
-   Scuderia Command v2.0.0
-   Sprint 1 - Mission Control Theme
-===================================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
 body{
-
-    background:#0b0b0b;
-    color:#ffffff;
-
+    background:#111;
+    color:white;
+    font-family:Arial,sans-serif;
 }
 
-.header{
-
-    height:80px;
-
-    background:#111111;
-
-    border-bottom:4px solid #E10600;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:0 20px;
-
-}
-
-.logo{
-
-    color:#E10600;
-
-    font-size:28px;
-
-    font-weight:bold;
-
-}
-
-.session{
-
-    text-align:center;
-
-}
-
-.session h1{
-
-    font-size:24px;
-
-}
-
-.session p{
-
-    color:#bbbbbb;
-
-    margin-top:5px;
-
-}
-
-.clock{
-
-    font-size:24px;
-
-    font-weight:bold;
-
-}
-
-.dashboard{
-
-    display:grid;
-
-    grid-template-columns:320px 1fr 320px;
-
-    gap:20px;
-
-    padding:20px;
-
-}
-
-.timingTower{
-
-    background:#171717;
-
-    border:1px solid #333333;
-
-    border-radius:12px;
-
-    padding:15px;
-
-}
-
-.centerPanel{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
-
-}
-
-.rightPanel{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
-
-}
-
-.card{
-
-    background:#171717;
-
-    border:1px solid #333333;
-
-    border-radius
 .driverRow{
-display:grid;
-grid-template-columns:50px 70px 1fr 50px 80px;
-align-items:center;
-padding:8px;
-border-bottom:1px solid #2f2f2f;
-font-size:14px;
+    display:grid;
+    grid-template-columns:40px 60px 1fr 40px 70px;
+    gap:10px;
+    padding:6px;
+    border-bottom:1px solid #333;
 }
 
-.position{
-font-weight:bold;
-color:#ffffff;
-}
-
-.driverCode{
-font-weight:bold;
-color:#ff3030;
-}
-
-.team{
-color:#cccccc;
-}
-
-.tyre{
-text-align:center;
-font-weight:bold;
-color:#ffd54f;
-}
-
-.gap{
-text-align:right;
-color:#bdbdbd;
-}
+.position{font-weight:bold;}
+.driverCode{color:#ff3030;font-weight:bold;}
+.team{color:#ccc;}
+.tyre{color:#ffd54f;}
+.gap{text-align:right;}
