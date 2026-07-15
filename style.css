@@ -124,3 +124,36 @@ body{
     border:1px solid #333333;
 
     border-radius
+.driverRow{
+display:grid;
+grid-template-columns:50px 70px 1fr 50px 80px;
+align-items:center;
+padding:8px;
+border-bottom:1px solid #2f2f2f;
+font-size:14px;
+}
+
+.position{
+font-weight:bold;
+color:#ffffff;
+}
+
+.driverCode{
+font-weight:bold;
+color:#ff3030;
+}
+
+.team{
+color:#cccccc;
+}
+
+.tyre{
+text-align:center;
+font-weight:bold;
+color:#ffd54f;
+}
+
+.gap{
+text-align:right;
+color:#bdbdbd;
+}
