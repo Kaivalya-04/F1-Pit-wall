@@ -1,4 +1,3 @@
-
 const telemetry = document.getElementById("telemetry");
 
 function updateTelemetry() {
@@ -18,8 +17,18 @@ function updateTelemetry() {
     let aero = speed > 250 ? "LOW DRAG" : "HIGH DOWNFORCE";
 
     telemetry.innerHTML = `
-        <h2>Live Telemetry</h2>
-
         <div class="telemetryRow"><span>Speed</span><span>${speed} km/h</span></div>
         <div class="telemetryRow"><span>Gear</span><span>${gear}</span></div>
-        <div class="telemetryRow"><
+        <div class="telemetryRow"><span>RPM</span><span>${rpm}</span></div>
+        <div class="telemetryRow"><span>Throttle</span><span>${throttle}%</span></div>
+        <div class="telemetryRow"><span>Brake</span><span>${brake}%</span></div>
+        <div class="telemetryRow"><span>ERS</span><span>${ers}</span></div>
+        <div class="telemetryRow"><span>Aero Mode</span><span>${aero}</span></div>
+        <div class="telemetryRow"><span>Battery</span><span>${battery}%</span></div>
+        <div class="telemetryRow"><span>Tyre Temp</span><span>${tyreTemp}°C</span></div>
+        <div class="telemetryRow"><span>Fuel</span><span>${fuel} kg</span></div>
+    `;
+}
+
+updateTelemetry();
+setInterval(updateTelemetry, 500);
