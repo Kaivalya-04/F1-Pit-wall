@@ -1,35 +1,58 @@
 const track = document.getElementById("track");
 
-track.innerHTML = `
-<svg id="trackSvg" viewBox="0 0 800 500" width="100%" height="400">
-    <ellipse
-        cx="400"
-        cy="250"
-        rx="300"
-        ry="120"
-        fill="none"
-        stroke="#888"
-        stroke-width="8"
-        id="trackPath"
+if (track) {
+  track.innerHTML = `
+  <svg viewBox="0 0 1000 600" width="100%" height="420">
+
+    <path
+      id="trackPath"
+      d="
+      M140 300
+      C140 150 260 80 420 80
+      L620 80
+      C810 80 900 170 900 300
+      C900 430 810 520 620 520
+      L420 520
+      C260 520 140 450 140 300
+      Z"
+      fill="none"
+      stroke="#777"
+      stroke-width="18"
+      stroke-linecap="round"
+      stroke-linejoin="round"
     />
-</svg>
-`;
 
-const svg = document.getElementById("trackSvg");
-const path = document.getElementById("trackPath");
+    <circle
+      id="car"
+      r="10"
+      fill="red"
+    />
 
-const length = path.getTotalLength();
+  </svg>
+  `;
 
-drivers.forEach((driver, i) => {
-    const car = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  const path = document.getElementById("trackPath");
+  const car = document.getElementById("car");
 
-    car.setAttribute("r", "6");
-    car.setAttribute("fill", i < 2 ? "red" : "#00ff99");
+  const length = path.getTotalLength();
 
-    svg.appendChild(car);
+  let progress = 0;
 
-    const point = path.getPointAtLength((length / drivers.length) * i);
+  function animate() {
+
+    progress += 2;
+
+    if (progress > length)
+      progress = 0;
+
+    const point = path.getPointAtLength(progress);
 
     car.setAttribute("cx", point.x);
     car.setAttribute("cy", point.y);
-});
+
+    requestAnimationFrame(animate);
+
+  }
+
+  animate();
+}
