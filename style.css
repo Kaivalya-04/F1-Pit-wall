@@ -17,3 +17,19 @@ body{
 .team{color:#ccc;}
 .tyre{color:#ffd54f;}
 .gap{text-align:right;}
+
+.telemetryRow{
+    display:flex;
+    justify-content:space-between;
+    padding:6px 0;
+    border-bottom:1px solid #2f2f2f;
+}
+
+.telemetryRow span:first-child{
+    color:#bdbdbd;
+}
+
+.telemetryRow span:last-child{
+    font-weight:bold;
+    color:#ffffff;
+}
