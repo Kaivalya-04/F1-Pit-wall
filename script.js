@@ -1,4 +1,4 @@
-const tower = document.getElementById("timingTower");
+const tower = document.getElementById("timingTowerContents");
 
 function buildTimingTower() {
     if (!tower) return;
