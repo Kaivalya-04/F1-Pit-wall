@@ -33,3 +33,32 @@ body{
     font-weight:bold;
     color:#ffffff;
 }
+
+.dashboard{
+    display:grid;
+    grid-template-columns:320px 1fr 320px;
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    background:#181818;
+    border:1px solid #333;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:20px;
+}
+
+#track{
+    width:100%;
+    height:420px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#track svg{
+    width:100%;
+    max-width:700px;
+    height:auto;
+}
