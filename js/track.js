@@ -1,4 +1,3 @@
-
 const track = document.getElementById("track");
 
 if (track) {
