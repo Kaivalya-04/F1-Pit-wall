@@ -53,7 +53,7 @@ if (track) {
             "circle"
         );
 
-        car.setAttribute("r", "6");
+        car.setAttribute("r", "10");
         car.setAttribute("fill", colors[i]);
 
         carsGroup.appendChild(car);
