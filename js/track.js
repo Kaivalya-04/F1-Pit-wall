@@ -85,11 +85,14 @@ if (track) {
 
         text.textContent = codes[i];
         text.setAttribute("fill", "white");
-        text.setAttribute("font-size", "6");
-        text.setAttribute("font-weight", "bold");
-        text.setAttribute("text-anchor", "middle");
-        text.setAttribute("dominant-baseline", "middle");
-
+        text.setAttribute("font-size", "8");
+text.setAttribute("font-family", "Arial");
+text.setAttribute("font-weight", "bold");
+text.setAttribute("fill", "black");
+text.setAttribute("text-anchor", "middle");
+text.setAttribute("x", "0");
+text.setAttribute("y", "3");
+text.setAttribute("pointer-events", "none");
         marker.appendChild(circle);
         marker.appendChild(text);
 
