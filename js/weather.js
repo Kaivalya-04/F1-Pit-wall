@@ -21,8 +21,6 @@ function updateWeather() {
     }
 
     weather.innerHTML = `
-        <h2>Weather</h2>
-
         <div class="telemetryRow">
             <span>Air Temp</span>
             <span>${airTemp}°C</span>
