@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scuderia Command v2.0.0</title>
+<title>Scuderia Command v2.1.0</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,150 +16,186 @@
 
 <header class="header">
 
-<div class="logo">
-🏎️ <span>SCUDERIA COMMAND</span>
-</div>
+    <div class="logo">
+        🏎️ <span>SCUDERIA COMMAND</span>
+    </div>
 
-<div class="session">
+    <div class="session">
 
-<h1 id="grandPrixName">
-2026 Formula 1 Mission Control
-</h1>
+        <h1 id="grandPrixName">
+            🏁 Hungarian Grand Prix 2026
+        </h1>
 
-<p id="sessionName">
-</p>
+        <p id="sessionName">
+            Race
+        </p>
 
-<div id="missionStatus" class="missionStatus">
+        <div id="missionStatus" class="missionStatus">
+            🟢 LIVE
+        </div>
 
-🟢 Waiting for Live Session
+    </div>
 
-</div>
+    <div class="clock">
 
-</div>
+        <div id="clock">
+            00:00:00
+        </div>
 
-<div class="clock">
-
-<div id="clock">
-00:00:00
-</div>
-
-</div>
+    </div>
 
 </header>
 
-<main class="dashboard">
 
-<aside class="timingTower">
+<!-- ============================= -->
+<!-- RACE WEEKEND CONTROL -->
+<!-- ============================= -->
 
-<div id="timingTowerContents">
+<section class="raceWeekend">
 
-Loading...
+    <div class="sectionTitle">
+        <span>RACE WEEKEND</span>
+        <span class="statusDot">● LIVE CONTROL</span>
+    </div>
 
-</div>
-
-</aside>
-
-<section class="centerPanel">
-
-<div class="card">
-
-<div id="trackMap">
-
-<h2>Track Map</h2>
-
-<div id="track"></div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>Live Telemetry</h2>
-
-<div id="telemetry">
-
-Waiting for telemetry...
-
-</div>
-
-</div>
+    <div id="sessionSelector" class="sessionSelector">
+        Loading sessions...
+    </div>
 
 </section>
 
-<aside class="rightPanel">
 
-<div class="card">
+<main class="dashboard">
 
-<h2>Weather</h2>
 
-<div id="weather">
+    <!-- ============================= -->
+    <!-- TIMING TOWER -->
+    <!-- ============================= -->
 
-Loading...
+    <aside class="timingTower">
 
-</div>
+        <div id="timingTowerContents">
+            Loading...
+        </div>
 
-</div>
+    </aside>
 
-<div class="card">
 
-<h2>Race Control</h2>
+    <!-- ============================= -->
+    <!-- CENTER PANEL -->
+    <!-- ============================= -->
 
-<div id="raceControl">
+    <section class="centerPanel">
 
-No messages.
 
-</div>
+        <div class="card">
 
-</div>
+            <div id="trackMap">
 
-<div class="card">
+                <h2>Track Map</h2>
 
-<h2>Team Radio</h2>
+                <div id="track"></div>
 
-<div id="teamRadio">
+            </div>
 
-No radio traffic.
+        </div>
 
-</div>
 
-</div>
+        <div class="card">
 
-<div class="card">
+            <h2>Live Telemetry</h2>
 
-<h2>AI Strategy</h2>
+            <div id="telemetry">
+                Waiting for telemetry...
+            </div>
 
-<div id="strategy">
+        </div>
 
-Waiting...
 
-</div>
+    </section>
 
-</div>
 
-</aside>
+    <!-- ============================= -->
+    <!-- RIGHT PANEL -->
+    <!-- ============================= -->
+
+    <aside class="rightPanel">
+
+
+        <div class="card">
+
+            <h2>Weather</h2>
+
+            <div id="weather">
+                Loading...
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Race Control</h2>
+
+            <div id="raceControl">
+                No messages.
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Team Radio</h2>
+
+            <div id="teamRadio">
+                No radio traffic.
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>AI Strategy</h2>
+
+            <div id="strategy">
+                Waiting...
+            </div>
+
+        </div>
+
+
+    </aside>
 
 </main>
 
+
 <footer>
 
-<div class="footer">
+    <div class="footer">
 
-Scuderia Command
+        <span>SCUDERIA COMMAND</span>
+        <span>v2.1.0</span>
+        <span>MISSION CONTROL</span>
 
-Version 2.0.0
-
-Sprint 1
-
-Build 001
-
-</div>
+    </div>
 
 </footer>
+
+
+<!-- ============================= -->
+<!-- DATA -->
+<!-- ============================= -->
 
 <script src="data/drivers.js"></script>
 <script src="data/teams.js"></script>
 <script src="data/sessions.js"></script>
+
+
+<!-- ============================= -->
+<!-- CORE SYSTEMS -->
+<!-- ============================= -->
 
 <script src="js/timing.js"></script>
 <script src="js/telemetry.js"></script>
@@ -168,8 +204,13 @@ Build 001
 <script src="js/racecontrol.js"></script>
 <script src="js/radio.js"></script>
 <script src="js/track.js"></script>
+
+<!-- SESSION MANAGER -->
 <script src="js/sessionManager.js"></script>
+
+<!-- MAIN APP -->
 <script src="js/app.js"></script>
+
 </body>
 
 </html>
