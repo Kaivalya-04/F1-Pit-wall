@@ -1,44 +1,53 @@
+
 const SESSIONS = [
-  {
-    id: "fp1",
-    name: "Practice 1",
-    icon: "🟢",
-    color: "#00ff88"
-  },
-  {
-    id: "fp2",
-    name: "Practice 2",
-    icon: "🟢",
-    color: "#00ff88"
-  },
-  {
-    id: "fp3",
-    name: "Practice 3",
-    icon: "🟢",
-    color: "#00ff88"
-  },
-  {
-    id: "sq",
-    name: "Sprint Qualifying",
-    icon: "🟡",
-    color: "#ffd54f"
-  },
-  {
-    id: "sprint",
-    name: "Sprint",
-    icon: "🟠",
-    color: "#ff9800"
-  },
-  {
-    id: "quali",
-    name: "Qualifying",
-    icon: "🔴",
-    color: "#ff5252"
-  },
-  {
-    id: "race",
-    name: "Grand Prix",
-    icon: "🏁",
-    color: "#e10600"
-  }
+
+    {
+        id: "fp1",
+        name: "Practice 1",
+        shortName: "FP1",
+        icon: "🟢"
+    },
+
+    {
+        id: "fp2",
+        name: "Practice 2",
+        shortName: "FP2",
+        icon: "🟢"
+    },
+
+    {
+        id: "fp3",
+        name: "Practice 3",
+        shortName: "FP3",
+        icon: "🟢"
+    },
+
+    {
+        id: "sq",
+        name: "Sprint Qualifying",
+        shortName: "SQ",
+        icon: "🟡"
+    },
+
+    {
+        id: "sprint",
+        name: "Sprint",
+        shortName: "SPR",
+        icon: "🟠"
+    },
+
+    {
+        id: "quali",
+        name: "Qualifying",
+        shortName: "Q",
+        icon: "🔴"
+    },
+
+    {
+        id: "race",
+        name: "Grand Prix",
+        shortName: "RACE",
+        icon: "🏁"
+    }
+
 ];
