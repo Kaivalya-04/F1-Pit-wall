@@ -1,25 +1,185 @@
+/* =========================================
+   SCUDERIA COMMAND
+   DRIVER DATABASE
+   2026
+========================================= */
 
 const drivers = [
-  { position: 1, code: "LEC", team: "Ferrari", tyre: "S", gap: "Leader" },
-  { position: 2, code: "HAM", team: "Ferrari", tyre: "M", gap: "+1.842" },
-  { position: 3, code: "VER", team: "Red Bull", tyre: "M", gap: "+4.091" },
-  { position: 4, code: "NOR", team: "McLaren", tyre: "H", gap: "+6.533" },
-  { position: 5, code: "PIA", team: "McLaren", tyre: "H", gap: "+7.144" },
-  { position: 6, code: "RUS", team: "Mercedes", tyre: "M", gap: "+9.875" },
-  { position: 7, code: "ANT", team: "Mercedes", tyre: "M", gap: "+12.411" },
-  { position: 8, code: "ALO", team: "Aston Martin", tyre: "H", gap: "+15.208" },
-  { position: 9, code: "STR", team: "Aston Martin", tyre: "H", gap: "+18.522" },
-  { position: 10, code: "GAS", team: "Alpine", tyre: "M", gap: "+22.801" },
-  { position: 11, code: "DOO", team: "Alpine", tyre: "M", gap: "+25.013" },
-  { position: 12, code: "ALB", team: "Williams", tyre: "S", gap: "+27.201" },
-  { position: 13, code: "SAI", team: "Williams", tyre: "S", gap: "+29.488" },
-  { position: 14, code: "HUL", team: "Sauber", tyre: "M", gap: "+33.790" },
-  { position: 15, code: "BOR", team: "Sauber", tyre: "M", gap: "+35.105" },
-  { position: 16, code: "OCO", team: "Haas", tyre: "H", gap: "+38.442" },
-  { position: 17, code: "BEA", team: "Haas", tyre: "H", gap: "+41.098" },
-  { position: 18, code: "LAW", team: "RB", tyre: "S", gap: "+45.771" },
-  { position: 19, code: "HAD", team: "RB", tyre: "S", gap: "+48.882" },
-  { position: 20, code: "TSU", team: "Red Bull", tyre: "M", gap: "+52.220" },
-  { position: 21, code: "DRV1", team: "Cadillac", tyre: "M", gap: "+1 Lap" },
-  { position: 22, code: "DRV2", team: "Cadillac", tyre: "M", gap: "+1 Lap" }
+
+    {
+        number: 1,
+        code: "NOR",
+        name: "Lando Norris",
+        team: "McLaren",
+        teamCode: "MCL"
+    },
+
+    {
+        number: 81,
+        code: "PIA",
+        name: "Oscar Piastri",
+        team: "McLaren",
+        teamCode: "MCL"
+    },
+
+    {
+        number: 12,
+        code: "ANT",
+        name: "Kimi Antonelli",
+        team: "Mercedes",
+        teamCode: "MER"
+    },
+
+    {
+        number: 63,
+        code: "RUS",
+        name: "George Russell",
+        team: "Mercedes",
+        teamCode: "MER"
+    },
+
+    {
+        number: 44,
+        code: "HAM",
+        name: "Lewis Hamilton",
+        team: "Ferrari",
+        teamCode: "FER"
+    },
+
+    {
+        number: 16,
+        code: "LEC",
+        name: "Charles Leclerc",
+        team: "Ferrari",
+        teamCode: "FER"
+    },
+
+    {
+        number: 3,
+        code: "VER",
+        name: "Max Verstappen",
+        team: "Red Bull Racing",
+        teamCode: "RBR"
+    },
+
+    {
+        number: 6,
+        code: "HAD",
+        name: "Isack Hadjar",
+        team: "Red Bull Racing",
+        teamCode: "RBR"
+    },
+
+    {
+        number: 30,
+        code: "LAW",
+        name: "Liam Lawson",
+        team: "Racing Bulls",
+        teamCode: "RB"
+    },
+
+    {
+        number: 41,
+        code: "LIN",
+        name: "Arvid Lindblad",
+        team: "Racing Bulls",
+        teamCode: "RB"
+    },
+
+    {
+        number: 10,
+        code: "GAS",
+        name: "Pierre Gasly",
+        team: "Alpine",
+        teamCode: "ALP"
+    },
+
+    {
+        number: 43,
+        code: "COL",
+        name: "Franco Colapinto",
+        team: "Alpine",
+        teamCode: "ALP"
+    },
+
+    {
+        number: 31,
+        code: "OCO",
+        name: "Esteban Ocon",
+        team: "Haas F1 Team",
+        teamCode: "HAS"
+    },
+
+    {
+        number: 87,
+        code: "BEA",
+        name: "Oliver Bearman",
+        team: "Haas F1 Team",
+        teamCode: "HAS"
+    },
+
+    {
+        number: 27,
+        code: "HUL",
+        name: "Nico Hulkenberg",
+        team: "Audi",
+        teamCode: "AUD"
+    },
+
+    {
+        number: 5,
+        code: "BOR",
+        name: "Gabriel Bortoleto",
+        team: "Audi",
+        teamCode: "AUD"
+    },
+
+    {
+        number: 55,
+        code: "SAI",
+        name: "Carlos Sainz",
+        team: "Williams",
+        teamCode: "WIL"
+    },
+
+    {
+        number: 23,
+        code: "ALB",
+        name: "Alexander Albon",
+        team: "Williams",
+        teamCode: "WIL"
+    },
+
+    {
+        number: 14,
+        code: "ALO",
+        name: "Fernando Alonso",
+        team: "Aston Martin",
+        teamCode: "AMR"
+    },
+
+    {
+        number: 18,
+        code: "STR",
+        name: "Lance Stroll",
+        team: "Aston Martin",
+        teamCode: "AMR"
+    },
+
+    {
+        number: 11,
+        code: "PER",
+        name: "Sergio Perez",
+        team: "Cadillac",
+        teamCode: "CAD"
+    },
+
+    {
+        number: 77,
+        code: "BOT",
+        name: "Valtteri Bottas",
+        team: "Cadillac",
+        teamCode: "CAD"
+    }
+
 ];
