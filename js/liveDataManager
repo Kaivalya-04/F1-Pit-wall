@@ -1,0 +1,428 @@
+/* =========================================
+   SCUDERIA COMMAND
+   LIVE DATA MANAGER
+   Version 2.2.0
+========================================= */
+
+const OPENF1_BASE =
+    "https://api.openf1.org/v1";
+
+
+const LiveData = {
+
+    sessionKey: null,
+
+    meetingKey: null,
+
+    connected: false,
+
+    lastUpdate: null,
+
+    polling: false,
+
+    pollInterval: 5000,
+
+    cache: {
+
+        drivers: [],
+        intervals: [],
+        carData: [],
+        laps: [],
+        weather: [],
+        raceControl: [],
+        stints: [],
+        pitStops: []
+
+    }
+
+};
+
+
+/* =========================================
+   API REQUEST
+========================================= */
+
+async function apiGet(path, params = {}) {
+
+    const query = new URLSearchParams();
+
+    Object.entries(params).forEach(([key, value]) => {
+
+        if (
+            value !== undefined &&
+            value !== null &&
+            value !== ""
+        ) {
+            query.set(key, value);
+        }
+
+    });
+
+
+    const url =
+        `${OPENF1_BASE}/${path}?${query.toString()}`;
+
+
+    try {
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+
+            throw new Error(
+                `HTTP ${response.status}`
+            );
+
+        }
+
+        return await response.json();
+
+    } catch (error) {
+
+        console.warn(
+            `[OpenF1] ${path} failed:`,
+            error.message
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =========================================
+   FIND SESSION
+========================================= */
+
+async function findSession(
+    year = 2026,
+    country = "Hungary",
+    sessionName = "Race"
+) {
+
+    const sessions = await apiGet(
+        "sessions",
+        {
+            year: year,
+            country_name: country,
+            session_name: sessionName
+        }
+    );
+
+
+    if (!sessions || sessions.length === 0) {
+
+        console.warn(
+            "[OpenF1] Session not found."
+        );
+
+        return null;
+
+    }
+
+
+    return sessions[sessions.length - 1];
+
+}
+
+
+/* =========================================
+   CONNECT TO SESSION
+========================================= */
+
+async function connectLiveSession() {
+
+    console.log(
+        "[SCUDERIA COMMAND] Searching for session..."
+    );
+
+
+    const session = await findSession();
+
+
+    if (!session) {
+
+        setConnectionStatus(
+            "⚠️ DATA UNAVAILABLE"
+        );
+
+        return;
+
+    }
+
+
+    LiveData.sessionKey =
+        session.session_key;
+
+
+    LiveData.meetingKey =
+        session.meeting_key;
+
+
+    LiveData.connected = true;
+
+
+    console.log(
+        "[SCUDERIA COMMAND] Connected:",
+        session.session_name,
+        session.session_key
+    );
+
+
+    setConnectionStatus(
+        "🟢 DATA CONNECTED"
+    );
+
+
+    await refreshLiveData();
+
+}
+
+
+/* =========================================
+   REFRESH DATA
+========================================= */
+
+async function refreshLiveData() {
+
+    if (!LiveData.sessionKey) {
+        return;
+    }
+
+
+    if (LiveData.polling) {
+        return;
+    }
+
+
+    LiveData.polling = true;
+
+
+    try {
+
+        const sessionKey =
+            LiveData.sessionKey;
+
+
+        const [
+            drivers,
+            intervals,
+            weather,
+            raceControl,
+            stints,
+            pitStops
+        ] = await Promise.all([
+
+            apiGet(
+                "drivers",
+                {
+                    session_key: sessionKey
+                }
+            ),
+
+            apiGet(
+                "intervals",
+                {
+                    session_key: sessionKey
+                }
+            ),
+
+            apiGet(
+                "weather",
+                {
+                    session_key: sessionKey
+                }
+            ),
+
+            apiGet(
+                "race_control",
+                {
+                    session_key: sessionKey
+                }
+            ),
+
+            apiGet(
+                "stints",
+                {
+                    session_key: sessionKey
+                }
+            ),
+
+            apiGet(
+                "pit",
+                {
+                    session_key: sessionKey
+                }
+            )
+
+        ]);
+
+
+        if (drivers) {
+            LiveData.cache.drivers = drivers;
+        }
+
+        if (intervals) {
+            LiveData.cache.intervals = intervals;
+        }
+
+        if (weather) {
+            LiveData.cache.weather = weather;
+        }
+
+        if (raceControl) {
+            LiveData.cache.raceControl =
+                raceControl;
+        }
+
+        if (stints) {
+            LiveData.cache.stints = stints;
+        }
+
+        if (pitStops) {
+            LiveData.cache.pitStops = pitStops;
+        }
+
+
+        LiveData.lastUpdate =
+            new Date();
+
+
+        publishLiveData();
+
+
+    } finally {
+
+        LiveData.polling = false;
+
+    }
+
+}
+
+
+/* =========================================
+   PUBLISH DATA
+========================================= */
+
+function publishLiveData() {
+
+    document.dispatchEvent(
+
+        new CustomEvent(
+            "scuderia:data",
+            {
+                detail: LiveData.cache
+            }
+        )
+
+    );
+
+
+    console.log(
+        "[SCUDERIA COMMAND] Data updated",
+        LiveData.lastUpdate
+    );
+
+}
+
+
+/* =========================================
+   CONNECTION STATUS
+========================================= */
+
+function setConnectionStatus(status) {
+
+    const statusElement =
+        document.getElementById(
+            "missionStatus"
+        );
+
+
+    if (!statusElement) {
+        return;
+    }
+
+
+    statusElement.textContent = status;
+
+}
+
+
+/* =========================================
+   AUTO POLLING
+========================================= */
+
+function startLivePolling() {
+
+    if (LiveData.pollTimer) {
+        clearInterval(
+            LiveData.pollTimer
+        );
+    }
+
+
+    LiveData.pollTimer =
+        setInterval(
+            refreshLiveData,
+            LiveData.pollInterval
+        );
+
+}
+
+
+/* =========================================
+   DATA EVENT LISTENER
+========================================= */
+
+document.addEventListener(
+    "scuderia:data",
+    event => {
+
+        const data =
+            event.detail;
+
+
+        console.log(
+            "[SCUDERIA COMMAND] Drivers:",
+            data.drivers.length
+        );
+
+
+        console.log(
+            "[SCUDERIA COMMAND] Intervals:",
+            data.intervals.length
+        );
+
+    }
+);
+
+
+/* =========================================
+   START
+========================================= */
+
+async function initializeLiveData() {
+
+    console.log(
+        "================================="
+    );
+
+    console.log(
+        "SCUDERIA COMMAND DATA MANAGER"
+    );
+
+    console.log(
+        "================================="
+    );
+
+
+    await connectLiveSession();
+
+
+    startLivePolling();
+
+}
+
+
+initializeLiveData();
