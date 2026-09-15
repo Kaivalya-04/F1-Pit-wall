@@ -273,3 +273,159 @@ body{
     }
 
 }
+/* =====================================
+   SCUDERIA COMMAND
+   TIMING TOWER
+===================================== */
+
+.timingRow {
+
+    display: grid;
+
+    grid-template-columns:
+        32px
+        minmax(90px, 1fr)
+        55px
+        80px;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 8px;
+
+    border-bottom: 1px solid #222;
+
+    background: #111;
+
+}
+
+
+.timingRow:hover {
+
+    background: #181818;
+
+}
+
+
+.timingPosition {
+
+    font-weight: 800;
+
+    color: #aaa;
+
+    text-align: center;
+
+}
+
+
+.timingDriver {
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+}
+
+
+.timingDriver strong {
+
+    color: #fff;
+
+    font-size: 13px;
+
+}
+
+
+.timingDriver small {
+
+    color: #777;
+
+    font-size: 9px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+.timingTyre {
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    color: #aaa;
+
+}
+
+
+.timingGap {
+
+    font-family: monospace;
+
+    font-size: 10px;
+
+    text-align: right;
+
+    color: #bbb;
+
+}
+
+
+.timingEmpty {
+
+    padding: 20px;
+
+    text-align: center;
+
+    color: #777;
+
+}
+
+
+@media (max-width: 700px) {
+
+    .timingRow {
+
+        grid-template-columns:
+            26px
+            minmax(70px, 1fr)
+            45px
+            65px;
+
+        gap: 5px;
+
+        padding: 8px 5px;
+
+    }
+
+
+    .timingDriver strong {
+
+        font-size: 12px;
+
+    }
+
+
+    .timingDriver small {
+
+        font-size: 8px;
+
+    }
+
+
+    .timingGap {
+
+        font-size: 9px;
+
+    }
+
+}
