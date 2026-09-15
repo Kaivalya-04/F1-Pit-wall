@@ -429,3 +429,130 @@ body{
     }
 
 }
+/* =====================================
+   TELEMETRY ENGINE
+===================================== */
+
+.telemetryHeader {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 10px 12px;
+
+    margin-bottom: 12px;
+
+    background: #151515;
+
+    border: 1px solid #292929;
+
+    border-radius: 8px;
+
+}
+
+
+.telemetryHeader span {
+
+    font-size: 10px;
+
+    color: #777;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+}
+
+
+.telemetryHeader strong {
+
+    font-size: 16px;
+
+    color: #fff;
+
+}
+
+
+.telemetryGrid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+}
+
+
+.telemetryMetric {
+
+    min-height: 65px;
+
+    padding: 10px;
+
+    background: #151515;
+
+    border: 1px solid #242424;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+}
+
+
+.telemetryMetric span {
+
+    font-size: 9px;
+
+    color: #777;
+
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+
+}
+
+
+.telemetryMetric strong {
+
+    font-family: monospace;
+
+    font-size: 15px;
+
+    color: #fff;
+
+}
+
+
+.telemetryMetric small {
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    color: #777;
+
+    margin-left: 2px;
+
+}
+
+
+@media (max-width: 700px) {
+
+    .telemetryGrid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
