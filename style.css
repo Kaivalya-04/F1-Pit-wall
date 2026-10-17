@@ -1,558 +1,965 @@
-body{
-    background:#111;
-    color:white;
-    font-family:Arial,sans-serif;
+
+:root {
+    --red: #df102b;
+    --red-dark: #b90b23;
+    --ink: #171719;
+    --muted: #85858b;
+    --line: #ececef;
+    --surface: #ffffff;
+    --page: #f7f7f8;
+    --green: #159b59;
+    --radius: 16px;
 }
 
-.driverRow{
-    display:grid;
-    grid-template-columns:40px 60px 1fr 40px 70px;
-    gap:10px;
-    padding:6px;
-    border-bottom:1px solid #333;
+* {
+    box-sizing: border-box;
 }
 
-.position{font-weight:bold;}
-.driverCode{color:#ff3030;font-weight:bold;}
-.team{color:#ccc;}
-.tyre{color:#ffd54f;}
-.gap{text-align:right;}
-
-.telemetryRow{
-    display:flex;
-    justify-content:space-between;
-    padding:6px 0;
-    border-bottom:1px solid #2f2f2f;
+html {
+    min-height: 100%;
+    background: var(--page);
+    -webkit-text-size-adjust: 100%;
 }
 
-.telemetryRow span:first-child{
-    color:#bdbdbd;
+body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--page);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Arial, sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
 }
 
-.telemetryRow span:last-child{
-    font-weight:bold;
-    color:#ffffff;
+button, select {
+    font: inherit;
 }
 
-.dashboard{
-    display:grid;
-    grid-template-columns:320px 1fr 320px;
-    gap:20px;
-    padding:20px;
+button {
+    -webkit-tap-highlight-color: transparent;
 }
 
-.card{
-    background:#181818;
-    border:1px solid #333;
-    border-radius:10px;
-    padding:15px;
-    margin-bottom:20px;
+.app-shell {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: var(--surface);
 }
 
-#track{
-    width:100%;
-    height:420px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.main-app {
+    display: none;
+    min-height: 100vh;
+    padding-bottom: 92px;
 }
 
-#track svg{
-    width:100%;
-    max-width:700px;
-    height:auto;
+.main-app.ready {
+    display: block;
 }
 
-.missionStatus{
-    margin-top:10px;
-    padding:8px 14px;
-    border-radius:10px;
-    background:#1b1b1b;
-    color:#00ff88;
-    font-weight:600;
-    font-size:14px;
-    text-align:center;
-    border:1px solid #2d2d2d;
-}
-@media (max-width:900px){
+/* Welcome */
 
-.dashboard{
-    display:block;
-}
-
-}
-
-/* =====================================
-   SCUDERIA COMMAND v2.1
-   RACE WEEKEND CONTROL
-===================================== */
-
-.raceWeekend {
-
-    margin: 15px;
-
-    padding: 15px;
-
-    background: #111;
-
-    border: 1px solid #292929;
-
-    border-radius: 12px;
-
-}
-
-
-.sectionTitle {
-
+.welcome-screen {
+    position: fixed;
+    z-index: 100;
+    inset: 0;
     display: flex;
-
+    flex-direction: column;
     justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 12px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-
-    color: #aaa;
-
+    overflow: auto;
+    padding: 54px 28px 30px;
+    background: #fff;
+    text-align: center;
 }
 
-
-.statusDot {
-
-    color: #00ff88;
-
-    font-size: 11px;
-
+.welcome-screen.hidden {
+    display: none;
 }
 
-
-.sessionSelector {
-
+.welcome-brand {
     display: flex;
-
-    gap: 8px;
-
-    overflow-x: auto;
-
-    padding-bottom: 4px;
-
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
 }
 
+.brand-mark {
+    display: grid;
+    place-items: center;
+    width: 94px;
+    height: 94px;
+    margin-bottom: 25px;
+    border: 3px solid var(--red);
+    border-radius: 48% 48% 43% 43%;
+    color: var(--red);
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -3px;
+    transform: skew(-5deg);
+}
+
+.brand-name {
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 1.45;
+    letter-spacing: 5px;
+}
+
+.brand-subtitle {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 2.4px;
+}
+
+.welcome-art {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 170px;
+    margin: 32px -28px 20px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #fff 48%, #f6f6f6 49%);
+}
+
+.art-number {
+    color: #f0f0f1;
+    font-size: clamp(120px, 35vw, 190px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -12px;
+}
+
+.art-stripe {
+    position: absolute;
+    right: -10%;
+    bottom: 40px;
+    left: -10%;
+    height: 12px;
+    background: var(--red);
+    transform: rotate(-7deg);
+}
+
+.art-caption {
+    position: absolute;
+    bottom: 14px;
+    color: #777;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.welcome-bottom {
+    width: 100%;
+    max-width: 400px;
+    margin: auto auto 0;
+}
+
+.welcome-bottom p {
+    margin: 0 0 26px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.welcome-bottom p strong {
+    color: var(--ink);
+}
+
+.primary-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 49px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--red);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+}
+
+.primary-button:active {
+    background: var(--red-dark);
+    transform: scale(.99);
+}
+
+.primary-button span {
+    font-size: 19px;
+}
+
+.primary-button.compact {
+    width: auto;
+    min-height: 42px;
+    gap: 22px;
+    margin-top: 20px;
+    padding: 0 15px;
+    font-size: 12px;
+}
+
+.welcome-footnote {
+    display: block;
+    margin-top: 20px;
+    color: #999;
+    font-size: 9px;
+    letter-spacing: 1.8px;
+}
+
+/* Header */
+
+.topbar {
+    position: sticky;
+    z-index: 20;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 66px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 255, 255, .96);
+    backdrop-filter: blur(12px);
+}
+
+.brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.mini-mark {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--red);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+    font-style: italic;
+}
+
+.brand-lockup strong,
+.brand-lockup span {
+    display: block;
+}
+
+.brand-lockup strong {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+}
+
+.brand-lockup span {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 8px;
+    letter-spacing: 1.5px;
+}
+
+.connection-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    color: #666;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .6px;
+}
+
+.connection-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e6a124;
+}
+
+/* Page structure */
+
+main {
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 22px 17px 26px;
+}
+
+.app-view {
+    display: none;
+    animation: viewIn .2s ease;
+}
+
+.app-view.active {
+    display: block;
+}
+
+@keyframes viewIn {
+    from { opacity: .65; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page-heading {
+    margin: 7px 0 20px;
+}
+
+.eyebrow {
+    display: block;
+    color: var(--red);
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: 1.9px;
+}
+
+.page-heading h1 {
+    margin: 9px 0 5px;
+    font-size: clamp(23px, 6vw, 31px);
+    line-height: 1.15;
+    font-weight: 850;
+    letter-spacing: -.8px;
+}
+
+.page-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 25px 0 12px;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -.3px;
+}
+
+.subtle-label {
+    color: #929298;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* Home hero */
+
+.session-hero {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    min-height: 215px;
+    padding: 22px 18px;
+    overflow: hidden;
+    border: 1px solid #f0f0f1;
+    border-radius: var(--radius);
+    background: linear-gradient(120deg, #fff 45%, #f8f8f9);
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 2;
+    width: 75%;
+}
+
+.hero-copy h2 {
+    margin: 12px 0 7px;
+    font-size: 27px;
+    font-weight: 850;
+    letter-spacing: -.8px;
+}
+
+.hero-copy p {
+    max-width: 210px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.circuit-decoration {
+    position: absolute;
+    top: 12px;
+    right: -4px;
+    width: 39%;
+    max-width: 155px;
+    opacity: .95;
+}
+
+.circuit-decoration svg {
+    width: 100%;
+    height: auto;
+}
+
+/* Quick access */
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.quick-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 137px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .2s, transform .2s;
+}
+
+.quick-card:active {
+    transform: scale(.985);
+}
+
+.quick-card:hover {
+    border-color: #d8d8dc;
+}
+
+.quick-icon {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 13px;
+    border-radius: 9px;
+    background: #f2f2f4;
+    color: #4e4e54;
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.quick-icon.red-icon {
+    background: #fff0f2;
+    color: var(--red);
+}
+
+.quick-card strong {
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.quick-card > span:not(.quick-icon):not(.card-arrow) {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.card-arrow {
+    position: absolute;
+    top: 15px;
+    right: 13px;
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* Cards and data panels */
+
+.surface-card {
+    padding: 15px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 3px 15px rgba(20, 20, 30, .025);
+    overflow: hidden;
+}
+
+#weather {
+    display: grid;
+    gap: 0;
+}
+
+#weather .telemetryRow,
+#raceControl .telemetryRow,
+#teamRadio .telemetryRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 0;
+    border-bottom: 1px solid #f0f0f2;
+    font-size: 12px;
+}
+
+#weather .telemetryRow:last-child,
+#raceControl .telemetryRow:last-child,
+#teamRadio .telemetryRow:last-child {
+    border-bottom: 0;
+}
+
+#weather .telemetryRow span:first-child {
+    color: var(--muted);
+}
+
+#weather .telemetryRow span:last-child {
+    font-weight: 750;
+}
+
+.session-selector {
+    display: flex;
+    gap: 8px;
+    padding: 2px 0 8px;
+    overflow-x: auto;
+}
 
 .sessionButton {
-
-    flex: 0 0 auto;
-
     display: flex;
-
     align-items: center;
-
+    flex: 0 0 auto;
     gap: 7px;
-
-    padding: 10px 14px;
-
-    border-radius: 9px;
-
-    border: 1px solid #303030;
-
-    background: #181818;
-
-    color: #aaa;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
+    padding: 11px 13px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    color: #555;
+    font-size: 11px;
+    font-weight: 750;
     cursor: pointer;
-
-    transition: 0.2s;
-
 }
-
-
-.sessionButton:hover {
-
-    border-color: #555;
-
-    color: #fff;
-
-}
-
 
 .sessionButton.active {
-
-    background: #252525;
-
-    border-color: #00ff88;
-
-    color: #fff;
-
-    box-shadow:
-        0 0 8px rgba(0, 255, 136, 0.15);
-
+    border-color: var(--red);
+    background: #fff5f6;
+    color: var(--red);
 }
-
-
-.sessionIcon {
-
-    font-size: 12px;
-
-}
-
 
 .missionStatus {
-
-    margin-top: 10px;
-
-    padding: 8px 14px;
-
-    border-radius: 10px;
-
-    background: #171717;
-
-    color: #00ff88;
-
-    font-weight: 700;
-
-    font-size: 13px;
-
-    text-align: center;
-
-    border: 1px solid #292929;
-
-}
-
-
-.footer {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding: 15px;
-
-    color: #666;
-
+    color: var(--muted);
     font-size: 11px;
-
-    letter-spacing: 0.5px;
-
 }
 
+/* Timing tower */
 
-@media (max-width: 700px) {
-
-    .raceWeekend {
-
-        margin: 10px;
-
-        padding: 12px;
-
-    }
-
-    .sectionTitle {
-
-        font-size: 11px;
-
-    }
-
-    .sessionButton {
-
-        padding: 9px 11px;
-
-        font-size: 11px;
-
-    }
-
+.info-strip {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 48px 62px;
+    gap: 7px;
+    padding: 10px 8px;
+    color: var(--muted);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .6px;
 }
-/* =====================================
-   SCUDERIA COMMAND
-   TIMING TOWER
-===================================== */
+
+.info-strip span:first-child {
+    text-align: center;
+}
+
+.info-strip span:nth-child(3) {
+    text-align: center;
+}
+
+.info-strip span:last-child {
+    text-align: right;
+}
+
+.timing-surface {
+    padding: 5px 8px;
+}
 
 .timingRow {
-
     display: grid;
-
-    grid-template-columns:
-        32px
-        minmax(90px, 1fr)
-        55px
-        80px;
-
+    grid-template-columns: 36px minmax(0, 1fr) 48px 62px;
     align-items: center;
-
-    gap: 8px;
-
-    padding: 9px 8px;
-
-    border-bottom: 1px solid #222;
-
-    background: #111;
-
+    gap: 7px;
+    min-height: 55px;
+    padding: 7px 0;
+    border-bottom: 1px solid #f0f0f2;
 }
 
-
-.timingRow:hover {
-
-    background: #181818;
-
+.timingRow:last-child {
+    border-bottom: 0;
 }
-
 
 .timingPosition {
-
-    font-weight: 800;
-
-    color: #aaa;
-
+    color: #777;
+    font-size: 12px;
+    font-weight: 850;
     text-align: center;
-
 }
-
 
 .timingDriver {
-
     display: flex;
-
     flex-direction: column;
-
     min-width: 0;
-
+    gap: 4px;
 }
-
 
 .timingDriver strong {
-
-    color: #fff;
-
-    font-size: 13px;
-
+    overflow: hidden;
+    color: var(--ink);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-
 
 .timingDriver small {
-
-    color: #777;
-
-    font-size: 9px;
-
-    white-space: nowrap;
-
     overflow: hidden;
-
+    color: var(--muted);
+    font-size: 9px;
     text-overflow: ellipsis;
-
+    white-space: nowrap;
 }
-
 
 .timingTyre {
-
+    color: var(--red);
     font-size: 9px;
-
-    font-weight: 700;
-
+    font-weight: 850;
     text-align: center;
-
-    color: #aaa;
-
 }
-
 
 .timingGap {
-
-    font-family: monospace;
-
-    font-size: 10px;
-
+    color: #666;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 9px;
     text-align: right;
-
-    color: #bbb;
-
 }
 
+.data-note {
+    margin: 13px 2px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.6;
+}
 
-.timingEmpty {
+/* Track map */
 
-    padding: 20px;
+.track-surface {
+    padding: 12px;
+}
 
-    text-align: center;
+.track-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 3px 12px;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: 1px;
+}
 
+.small-live {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     color: #777;
-
+    font-size: 8px;
 }
 
-
-@media (max-width: 700px) {
-
-    .timingRow {
-
-        grid-template-columns:
-            26px
-            minmax(70px, 1fr)
-            45px
-            65px;
-
-        gap: 5px;
-
-        padding: 8px 5px;
-
-    }
-
-
-    .timingDriver strong {
-
-        font-size: 12px;
-
-    }
-
-
-    .timingDriver small {
-
-        font-size: 8px;
-
-    }
-
-
-    .timingGap {
-
-        font-size: 9px;
-
-    }
-
+.small-live span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
 }
-/* =====================================
-   TELEMETRY ENGINE
-===================================== */
+
+#trackMap {
+    width: 100%;
+}
+
+#track {
+    min-height: 230px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f7f7f8;
+}
+
+#track svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+#trackPositions {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.text-button {
+    padding: 5px 0;
+    border: 0;
+    background: transparent;
+    color: var(--red);
+    font-size: 10px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* Driver and telemetry */
+
+.driver-selector-wrap {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 13px;
+}
+
+.driver-selector-wrap label {
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.driver-selector-wrap select {
+    width: 100%;
+    min-height: 45px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    outline-color: var(--red);
+    background: #fff;
+    color: var(--ink);
+}
+
+.telemetry-surface {
+    padding: 12px;
+}
 
 .telemetryHeader {
-
     display: flex;
-
-    justify-content: space-between;
-
     align-items: center;
-
-    padding: 10px 12px;
-
+    justify-content: space-between;
     margin-bottom: 12px;
-
-    background: #151515;
-
-    border: 1px solid #292929;
-
-    border-radius: 8px;
-
+    padding: 12px;
+    border-radius: 10px;
+    background: #fafafa;
 }
-
 
 .telemetryHeader span {
-
-    font-size: 10px;
-
-    color: #777;
-
-    font-weight: 700;
-
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 800;
     letter-spacing: 1px;
-
 }
-
 
 .telemetryHeader strong {
-
-    font-size: 16px;
-
-    color: #fff;
-
+    color: var(--red);
+    font-size: 15px;
 }
-
 
 .telemetryGrid {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
-
 }
-
 
 .telemetryMetric {
-
-    min-height: 65px;
-
-    padding: 10px;
-
-    background: #151515;
-
-    border: 1px solid #242424;
-
-    border-radius: 8px;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-between;
-
+    gap: 13px;
+    min-width: 0;
+    min-height: 80px;
+    padding: 12px;
+    border: 1px solid #efeff1;
+    border-radius: 11px;
+    background: #fff;
 }
 
-
-.telemetryMetric span {
-
+.telemetryMetric > span {
+    color: var(--muted);
     font-size: 9px;
-
-    color: #777;
-
-    font-weight: 700;
-
-    letter-spacing: 0.7px;
-
+    font-weight: 800;
+    letter-spacing: .7px;
 }
-
 
 .telemetryMetric strong {
-
-    font-family: monospace;
-
-    font-size: 15px;
-
-    color: #fff;
-
+    overflow-wrap: anywhere;
+    color: var(--ink);
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 19px;
+    font-weight: 800;
 }
-
 
 .telemetryMetric small {
-
+    color: var(--muted);
     font-family: inherit;
-
     font-size: 9px;
-
-    color: #777;
-
-    margin-left: 2px;
-
 }
 
+.graph-row {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) 66px;
+    align-items: center;
+    gap: 9px;
+    margin: 13px 0;
+    color: #777;
+    font-size: 10px;
+}
 
-@media (max-width: 700px) {
+.graph-row strong {
+    color: var(--ink);
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 10px;
+    text-align: right;
+}
 
-    .telemetryGrid {
+.graph-track {
+    height: 7px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #eeeeef;
+}
 
-        grid-template-columns:
-            repeat(2, 1fr);
+.graph-fill {
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--red);
+    transition: width .35s ease;
+}
 
+/* More screen */
+
+.system-info > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f2;
+}
+
+.system-info > div:last-child {
+    border-bottom: 0;
+}
+
+.system-info span {
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 750;
+}
+
+.system-info strong {
+    font-size: 10px;
+    text-align: right;
+}
+
+/* Bottom navigation */
+
+.bottom-nav {
+    position: fixed;
+    z-index: 30;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-height: 67px;
+    padding: 8px 5px max(8px, env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line);
+    background: rgba(255, 255, 255, .97);
+    backdrop-filter: blur(12px);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 0;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: #a0a0a5;
+    cursor: pointer;
+}
+
+.nav-item > span {
+    font-size: 21px;
+    line-height: 1;
+}
+
+.nav-item small {
+    overflow: hidden;
+    max-width: 100%;
+    font-size: 9px;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nav-item.active {
+    color: var(--red);
+}
+
+.nav-item.active small {
+    font-weight: 850;
+}
+
+.app-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 18px;
+    color: #a0a0a5;
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 1px;
+}
+
+@media (min-width: 700px) {
+    .app-shell {
+        max-width: 1000px;
+        box-shadow: 0 0 50px rgba(20, 20, 30, .04);
     }
 
+    main {
+        padding: 30px 28px;
+    }
+
+    .quick-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .session-hero {
+        min-height: 240px;
+        padding: 28px;
+    }
+
+    .circuit-decoration {
+        right: 30px;
+        width: 180px;
+    }
+
+    .telemetryGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bottom-nav {
+        right: auto;
+        left: 50%;
+        width: min(100%, 1000px);
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
 }
