@@ -1,382 +1,169 @@
+
 /* =========================================
-   SCUDERIA COMMAND
-   TELEMETRY ENGINE
-   Module 05
+   SCUDERIA COMMAND v2.3.1
+   TELEMETRY ENGINE — UPDATE FIX
 ========================================= */
 
-const telemetry =
-    document.getElementById("telemetry");
+(() => {
+    const telemetryElement = document.getElementById("telemetry");
 
+    let selectedDriver = "LEC";
+    let usingRealData = false;
 
-// =========================================
-// SELECTED DRIVER
-// =========================================
-
-let selectedDriver = "LEC";
-
-let telemetryState = {
-
-    speed: 0,
-    gear: 0,
-    rpm: 0,
-    throttle: 0,
-    brake: 0,
-    ers: "STANDBY",
-    tyreTemp: 0,
-    fuel: 0,
-    aero: "NORMAL"
-
-};
-
-
-// =========================================
-// RANDOM TELEMETRY FALLBACK
-// =========================================
-
-function generateTelemetry() {
-
-    const throttle =
-        Math.floor(Math.random() * 101);
-
-    const braking =
-        throttle > 70
-            ? 0
-            : Math.floor(Math.random() * 101);
-
-
-    telemetryState = {
-
-        speed:
-            Math.floor(
-                100 + Math.random() * 220
-            ),
-
-        gear:
-            Math.floor(
-                1 + Math.random() * 8
-            ),
-
-        rpm:
-            Math.floor(
-                8000 + Math.random() * 4000
-            ),
-
-        throttle:
-
-            throttle,
-
-        brake:
-
-            braking,
-
-        ers:
-
-            throttle > 80
-                ? "DEPLOY"
-                : throttle < 30
-                    ? "HARVEST"
-                    : "BALANCED",
-
-        tyreTemp:
-
-            Math.floor(
-                85 + Math.random() * 25
-            ),
-
-        fuel:
-
-            (
-                35 +
-                Math.random() * 15
-            ).toFixed(1),
-
-        aero:
-
-            throttle > 85
-                ? "LOW DRAG"
-                : "HIGH DOWNFORCE"
-
+    const state = {
+        speed: 0,
+        gear: 1,
+        rpm: 8000,
+        throttle: 0,
+        brake: 0,
+        ers: "STANDBY",
+        tyreTemp: 90,
+        fuel: 45.0,
+        aero: "HIGH DOWNFORCE"
     };
 
-
-    renderTelemetry();
-
-}
-
-
-// =========================================
-// RENDER TELEMETRY
-// =========================================
-
-function renderTelemetry() {
-
-    if (!telemetry) {
-        return;
+    function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    function generateTelemetry() {
+        // Generate a plausible simulated snapshot.
+        const throttle = randomInt(0, 100);
+        const braking = throttle > 75 ? 0 : randomInt(0, 85);
 
-    telemetry.innerHTML = `
+        state.speed = randomInt(90, 330);
+        state.gear = randomInt(1, 8);
+        state.rpm = randomInt(8000, 12000);
+        state.throttle = throttle;
+        state.brake = braking;
+        state.ers = throttle > 80
+            ? "DEPLOY"
+            : throttle < 30
+                ? "HARVEST"
+                : "BALANCED";
+        state.tyreTemp = randomInt(85, 110);
+        state.fuel = Number((35 + Math.random() * 15).toFixed(1));
+        state.aero = throttle > 85 ? "LOW DRAG" : "HIGH DOWNFORCE";
 
-        <div class="telemetryHeader">
-
-            <span>
-                DRIVER
-            </span>
-
-            <strong>
-                ${selectedDriver}
-            </strong>
-
-        </div>
-
-
-        <div class="telemetryGrid">
-
-            <div class="telemetryMetric">
-
-                <span>SPEED</span>
-
-                <strong>
-                    ${telemetryState.speed}
-                    <small>km/h</small>
-                </strong>
-
-            </div>
-
-
-            <div class="telemetryMetric">
-
-                <span>GEAR</span>
-
-                <strong>
-                    ${telemetryState.gear}
-                </strong>
-
-            </div>
-
-
-            <div class="telemetryMetric">
-
-                <span>RPM</span>
-
-                <strong>
-                    ${telemetryState.rpm}
-                </strong>
-
-            </div>
-
-
-            <div class="telemetryMetric">
-
-                <span>THROTTLE</span>
-
-                <strong>
-                    ${telemetryState.throttle}%
-                </strong>
-
-            </div>
-
-
-            <div class="telemetryMetric">
-
-                <span>BRAKE</span>
-
-                <strong>
-                    ${telemetryState.brake}%
-                </strong>
-
-            </div>
-
-
-            <div class="telemetryMetric">
-
-                <span>ERS</span>
-
-                <strong>
-                    ${telemetryState.ers}
-                </strong>
-
-            </div>
-
-
-            <div class="telemetryMetric">
-
-                <span>TYRE TEMP</span>
-
-                <strong>
-                    ${telemetryState.tyreTemp}
-                    <small>°C</small>
-                </strong>
-
-            </div>
-
-
-            <div class="telemetryMetric">
-
-                <span>FUEL</span>
-
-                <strong>
-                    ${telemetryState.fuel}
-                    <small>kg</small>
-                </strong>
-
-            </div>
-
-
-            <div class="telemetryMetric">
-
-                <span>AERO</span>
-
-                <strong>
-                    ${telemetryState.aero}
-                </strong>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-// =========================================
-// REAL OPENF1 TELEMETRY
-// =========================================
-
-function processRealTelemetry(carData) {
-
-    if (
-        !carData ||
-        carData.length === 0
-    ) {
-        return;
+        renderTelemetry();
     }
 
+    function renderTelemetry() {
+        if (telemetryElement) {
+            telemetryElement.innerHTML = `
+                <div class="telemetryHeader">
+                    <span>SELECTED DRIVER</span>
+                    <strong>${selectedDriver}</strong>
+                </div>
 
-    const latest =
-        carData[carData.length - 1];
-
-
-    if (!latest) {
-        return;
-    }
-
-
-    telemetryState.speed =
-        latest.speed ??
-        telemetryState.speed;
-
-
-    telemetryState.gear =
-        latest.n_gear ??
-        telemetryState.gear;
-
-
-    telemetryState.rpm =
-        latest.rpm ??
-        telemetryState.rpm;
-
-
-    telemetryState.throttle =
-        latest.throttle ??
-        telemetryState.throttle;
-
-
-    telemetryState.brake =
-        latest.brake ??
-        telemetryState.brake;
-
-
-    renderTelemetry();
-
-}
-
-
-// =========================================
-// LIVE DATA EVENT
-// =========================================
-
-document.addEventListener(
-    "scuderia:data",
-    event => {
-
-        const data =
-            event.detail;
-
-
-        if (!data) {
-            return;
+                <div class="telemetryGrid">
+                    <div class="telemetryMetric">
+                        <span>SPEED</span>
+                        <strong>${state.speed} <small>km/h</small></strong>
+                    </div>
+                    <div class="telemetryMetric">
+                        <span>GEAR</span>
+                        <strong>${state.gear}</strong>
+                    </div>
+                    <div class="telemetryMetric">
+                        <span>RPM</span>
+                        <strong>${state.rpm}</strong>
+                    </div>
+                    <div class="telemetryMetric">
+                        <span>THROTTLE</span>
+                        <strong>${state.throttle}%</strong>
+                    </div>
+                    <div class="telemetryMetric">
+                        <span>BRAKE</span>
+                        <strong>${state.brake}%</strong>
+                    </div>
+                    <div class="telemetryMetric">
+                        <span>ERS</span>
+                        <strong>${state.ers}</strong>
+                    </div>
+                    <div class="telemetryMetric">
+                        <span>TYRE TEMP</span>
+                        <strong>${state.tyreTemp}<small> °C</small></strong>
+                    </div>
+                    <div class="telemetryMetric">
+                        <span>FUEL</span>
+                        <strong>${state.fuel}<small> kg</small></strong>
+                    </div>
+                    <div class="telemetryMetric">
+                        <span>AERO MODE</span>
+                        <strong>${state.aero}</strong>
+                    </div>
+                </div>
+            `;
         }
 
-
-        if (
-            data.carData &&
-            data.carData.length > 0
-        ) {
-
-            processRealTelemetry(
-                data.carData
-            );
-
-        }
-
+        // Send the exact same values to the graph module.
+        document.dispatchEvent(
+            new CustomEvent("scuderia:telemetry", {
+                detail: { ...state, driver: selectedDriver }
+            })
+        );
     }
-);
 
+    function processRealTelemetry(carData) {
+        if (!carData) return;
 
-// =========================================
-// DRIVER SELECTOR EVENT
-// =========================================
+        const latest = Array.isArray(carData)
+            ? carData[carData.length - 1]
+            : carData;
 
-document.addEventListener(
-    "scuderia:driver",
-    event => {
+        if (!latest) return;
 
+        // Accept only a record containing actual car telemetry.
         if (
-            event.detail &&
-            event.detail.code
-        ) {
+            latest.speed == null &&
+            latest.rpm == null &&
+            latest.n_gear == null
+        ) return;
 
-            selectedDriver =
-                event.detail.code;
+        if (latest.speed != null) state.speed = latest.speed;
+        if (latest.n_gear != null) state.gear = latest.n_gear;
+        if (latest.rpm != null) state.rpm = latest.rpm;
+        if (latest.throttle != null) state.throttle = latest.throttle;
+        if (latest.brake != null) state.brake = latest.brake;
 
+        usingRealData = true;
+        renderTelemetry();
+    }
+
+    document.addEventListener("scuderia:data", event => {
+        const data = event.detail;
+        if (!data) return;
+
+        if (data.carData) {
+            processRealTelemetry(data.carData);
+        }
+    });
+
+    document.addEventListener("scuderia:driver", event => {
+        const driver = event.detail;
+        if (!driver || !driver.code) return;
+
+        selectedDriver = driver.code;
+        usingRealData = false;
+
+        // Immediately show a fresh snapshot for the selected driver.
+        generateTelemetry();
+    });
+
+    // Start immediately so the UI is never left blank.
+    generateTelemetry();
+
+    // Check for a genuinely active data connection safely.
+    window.setInterval(() => {
+        const liveDataExists = typeof LiveData !== "undefined";
+        const connected = liveDataExists && LiveData.connected === true;
+
+        if (!connected) {
+            usingRealData = false;
             generateTelemetry();
-
         }
+    }, 2000);
 
-    }
-);
-
-
-// =========================================
-// INITIALIZE
-// =========================================
-
-generateTelemetry();
-
-
-// =========================================
-// FALLBACK UPDATE
-// =========================================
-
-setInterval(
-    () => {
-
-        if (
-            !LiveData ||
-            !LiveData.connected
-        ) {
-
-            generateTelemetry();
-
-        }
-
-    },
-    2000
-);
-
-
-console.log(
-    "[SCUDERIA COMMAND] Telemetry Engine online."
-);
+    console.log("[SCUDERIA COMMAND] Telemetry update fix loaded.");
+})();
