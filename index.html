@@ -1,219 +1,261 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Scuderia Command v2.1.0</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Scuderia Command v2.3.0</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header class="header">
+<div class="app-shell">
 
-    <div class="logo">
-        🏎️ <span>SCUDERIA COMMAND</span>
-    </div>
-
-    <div class="session">
-
-        <h1 id="grandPrixName">
-            🏁 Hungarian Grand Prix 2026
-        </h1>
-
-        <p id="sessionName">
-            Race
-        </p>
-
-        <div id="missionStatus" class="missionStatus">
-            🟢 LIVE
+    <section id="welcomeScreen" class="welcome-screen">
+        <div class="welcome-brand">
+            <div class="brand-mark">SC</div>
+            <div class="brand-name">SCUDERIA<br>COMMAND</div>
+            <div class="brand-subtitle">FORMULA ONE MISSION CONTROL</div>
         </div>
-
-    </div>
-
-    <div class="clock">
-
-        <div id="clock">
-            00:00:00
+        <div class="welcome-art">
+            <span class="art-number">16</span>
+            <span class="art-stripe"></span>
+            <span class="art-caption">ENGINEERED FOR RACE DAY</span>
         </div>
-
-    </div>
-
-</header>
-
-
-<!-- ============================= -->
-<!-- RACE WEEKEND CONTROL -->
-<!-- ============================= -->
-
-<section class="raceWeekend">
-
-    <div class="sectionTitle">
-        <span>RACE WEEKEND</span>
-        <span class="statusDot">● LIVE CONTROL</span>
-    </div>
-
-    <div id="sessionSelector" class="sessionSelector">
-        Loading sessions...
-    </div>
-
-</section>
-
-
-<main class="dashboard">
-
-
-    <!-- ============================= -->
-    <!-- TIMING TOWER -->
-    <!-- ============================= -->
-
-    <aside class="timingTower">
-
-        <div id="timingTowerContents">
-            Loading...
+        <div class="welcome-bottom">
+            <p>Same passion.<br><strong>A faster tomorrow.</strong></p>
+            <button class="primary-button" data-action="get-started">
+                Get Started <span>→</span>
+            </button>
+            <span class="welcome-footnote">YOUR RACE. YOUR COMMAND.</span>
         </div>
-
-    </aside>
-
-
-    <!-- ============================= -->
-    <!-- CENTER PANEL -->
-    <!-- ============================= -->
-
-    <section class="centerPanel">
-
-
-        <div class="card">
-
-            <div id="trackMap">
-
-                <h2>Track Map</h2>
-
-                <div id="track"></div>
-
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <h2>Live Telemetry</h2>
-
-            <div id="telemetry">
-                Waiting for telemetry...
-            </div>
-
-        </div>
-
-
     </section>
 
+    <div id="mainApp" class="main-app">
 
-    <!-- ============================= -->
-    <!-- RIGHT PANEL -->
-    <!-- ============================= -->
-
-    <aside class="rightPanel">
-
-
-        <div class="card">
-
-            <h2>Weather</h2>
-
-            <div id="weather">
-                Loading...
+        <header class="topbar">
+            <div class="brand-lockup">
+                <div class="mini-mark">SC</div>
+                <div>
+                    <strong>SCUDERIA COMMAND</strong>
+                    <span>RACE ENGINEERING</span>
+                </div>
             </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <h2>Race Control</h2>
-
-            <div id="raceControl">
-                No messages.
+            <div class="connection-pill">
+                <span class="connection-dot"></span>
+                <span id="connectionLabel">DATA STANDBY</span>
             </div>
+        </header>
 
-        </div>
+        <main>
 
+            <!-- HOME -->
+            <section class="app-view active" id="view-home">
+                <div class="page-heading">
+                    <span class="eyebrow">RACE WEEKEND</span>
+                    <h1 id="grandPrixName">2026 Formula 1</h1>
+                    <p id="sessionName">Mission Control</p>
+                </div>
 
-        <div class="card">
+                <div class="session-hero">
+                    <div class="hero-copy">
+                        <span class="eyebrow">SESSION OVERVIEW</span>
+                        <h2 id="heroSessionName">Race Weekend</h2>
+                        <p id="heroSessionDescription">Your race engineering dashboard.</p>
+                        <button class="primary-button compact" data-action="open-timing">
+                            View Timing <span>→</span>
+                        </button>
+                    </div>
+                    <div class="circuit-decoration">
+                        <svg viewBox="0 0 150 160" role="img" aria-label="Decorative circuit outline">
+                            <path d="M38 18 L95 12 Q116 12 108 37 L101 55 Q97 69 115 81 L126 98 Q133 116 110 121 L76 129 L56 148 Q43 155 34 137 L23 109 L28 83 L13 65 Q6 48 25 36 Z"
+                                  fill="none" stroke="#dedede" stroke-width="5" stroke-linejoin="round"/>
+                            <path d="M38 18 L95 12 Q116 12 108 37"
+                                  fill="none" stroke="#df102b" stroke-width="5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
 
-            <h2>Team Radio</h2>
+                <div class="section-heading">
+                    <h2>Race control</h2>
+                    <span class="subtle-label">QUICK ACCESS</span>
+                </div>
 
-            <div id="teamRadio">
-                No radio traffic.
-            </div>
+                <div class="quick-grid">
+                    <button class="quick-card" data-view="timing">
+                        <span class="quick-icon red-icon">01</span>
+                        <strong>Live Timing</strong>
+                        <span>Timing tower & gaps</span>
+                        <span class="card-arrow">↗</span>
+                    </button>
+                    <button class="quick-card" data-view="track">
+                        <span class="quick-icon">02</span>
+                        <strong>Track Map</strong>
+                        <span>Circuit & positions</span>
+                        <span class="card-arrow">↗</span>
+                    </button>
+                    <button class="quick-card" data-view="driver">
+                        <span class="quick-icon">03</span>
+                        <strong>Telemetry</strong>
+                        <span>Car data & metrics</span>
+                        <span class="card-arrow">↗</span>
+                    </button>
+                    <button class="quick-card" data-view="more">
+                        <span class="quick-icon">04</span>
+                        <strong>Race Control</strong>
+                        <span>Messages & radio</span>
+                        <span class="card-arrow">↗</span>
+                    </button>
+                </div>
 
-        </div>
+                <div class="section-heading">
+                    <h2>Track conditions</h2>
+                    <span class="subtle-label">WEATHER</span>
+                </div>
+                <div class="surface-card">
+                    <div id="weather">Weather data unavailable</div>
+                </div>
 
+                <div class="section-heading">
+                    <h2>Weekend sessions</h2>
+                    <span class="subtle-label">SELECT SESSION</span>
+                </div>
+                <div id="sessionSelector" class="session-selector">
+                    Session options will appear here.
+                </div>
+            </section>
 
-        <div class="card">
+            <!-- TIMING -->
+            <section class="app-view" id="view-timing">
+                <div class="page-heading">
+                    <span class="eyebrow">LIVE TIMING</span>
+                    <h1>Timing Tower</h1>
+                    <p>Driver positions and intervals</p>
+                </div>
+                <div class="info-strip">
+                    <span>POSITION</span>
+                    <span>DRIVER / TEAM</span>
+                    <span>TYRE</span>
+                    <span>GAP</span>
+                </div>
+                <div class="surface-card timing-surface">
+                    <div id="timingTowerContents">Waiting for timing data…</div>
+                </div>
+                <p class="data-note">Timing updates depend on the connected data source. Simulated data is not official race timing.</p>
+            </section>
 
-            <h2>AI Strategy</h2>
+            <!-- TRACK -->
+            <section class="app-view" id="view-track">
+                <div class="page-heading">
+                    <span class="eyebrow">CIRCUIT INTELLIGENCE</span>
+                    <h1>Track Map</h1>
+                    <p id="trackSessionLabel">Circuit overview</p>
+                </div>
+                <div class="surface-card track-surface">
+                    <div class="track-topline">
+                        <strong>CIRCUIT VIEW</strong>
+                        <span class="small-live"><span></span> DATA VIEW</span>
+                    </div>
+                    <div id="track"></div>
+                </div>
+                <div class="section-heading">
+                    <h2>Live positions</h2>
+                    <button class="text-button" data-view="timing">See timing →</button>
+                </div>
+                <div class="surface-card">
+                    <div id="trackPositions">
+                        Select Live Timing to inspect driver positions.
+                    </div>
+                </div>
+            </section>
 
-            <div id="strategy">
-                Waiting...
-            </div>
+            <!-- DRIVER -->
+            <section class="app-view" id="view-driver">
+                <div class="page-heading">
+                    <span class="eyebrow">DRIVER ENGINEERING</span>
+                    <h1>Driver Telemetry</h1>
+                    <p>Car performance & control inputs</p>
+                </div>
+                <div class="driver-selector-wrap">
+                    <label for="driverSelector">SELECT DRIVER</label>
+                    <select id="driverSelector">
+                        <option value="LEC">Charles Leclerc</option>
+                        <option value="HAM">Lewis Hamilton</option>
+                        <option value="VER">Max Verstappen</option>
+                        <option value="NOR">Lando Norris</option>
+                    </select>
+                </div>
+                <div class="surface-card telemetry-surface">
+                    <div id="telemetry">Waiting for telemetry…</div>
+                </div>
+                <div class="section-heading">
+                    <h2>Telemetry history</h2>
+                    <span class="subtle-label">ENGINEERING</span>
+                </div>
+                <div class="surface-card">
+                    <div class="graph-row"><span>Speed</span><div class="graph-track"><div id="speedBar" class="graph-fill"></div></div><strong id="speedValue">—</strong></div>
+                    <div class="graph-row"><span>RPM</span><div class="graph-track"><div id="rpmBar" class="graph-fill"></div></div><strong id="rpmValue">—</strong></div>
+                    <div class="graph-row"><span>Throttle</span><div class="graph-track"><div id="throttleBar" class="graph-fill"></div></div><strong id="throttleValue">—</strong></div>
+                    <div class="graph-row"><span>Brake</span><div class="graph-track"><div id="brakeBar" class="graph-fill"></div></div><strong id="brakeValue">—</strong></div>
+                </div>
+                <p class="data-note">Values are simulated unless a valid live telemetry feed is connected.</p>
+            </section>
 
-        </div>
+            <!-- MORE -->
+            <section class="app-view" id="view-more">
+                <div class="page-heading">
+                    <span class="eyebrow">TEAM COMMUNICATIONS</span>
+                    <h1>Race Centre</h1>
+                    <p>Messages, radio and strategy</p>
+                </div>
+                <div class="section-heading"><h2>Race Control</h2></div>
+                <div class="surface-card"><div id="raceControl">No race-control messages available.</div></div>
+                <div class="section-heading"><h2>Team Radio</h2></div>
+                <div class="surface-card"><div id="teamRadio">No radio traffic available.</div></div>
+                <div class="section-heading"><h2>Strategy Desk</h2></div>
+                <div class="surface-card"><div id="strategy">Strategy data unavailable.</div></div>
+                <div class="section-heading"><h2>System information</h2></div>
+                <div class="surface-card system-info">
+                    <div><span>APPLICATION</span><strong>Scuderia Command</strong></div>
+                    <div><span>VERSION</span><strong>2.3.0</strong></div>
+                    <div><span>DATA SOURCE</span><strong>OpenF1 integration</strong></div>
+                    <div><span>STATUS</span><strong id="missionStatus">Data standby</strong></div>
+                </div>
+            </section>
 
+        </main>
 
-    </aside>
+        <nav class="bottom-nav" aria-label="Main navigation">
+            <button class="nav-item active" data-view="home"><span>⌂</span><small>Home</small></button>
+            <button class="nav-item" data-view="timing"><span>◷</span><small>Live Timing</small></button>
+            <button class="nav-item" data-view="track"><span>⌁</span><small>Track</small></button>
+            <button class="nav-item" data-view="driver"><span>◉</span><small>Telemetry</small></button>
+            <button class="nav-item" data-view="more"><span>•••</span><small>More</small></button>
+        </nav>
 
-</main>
-
-
-<footer>
-
-    <div class="footer">
-
-        <span>SCUDERIA COMMAND</span>
-        <span>v2.1.0</span>
-        <span>MISSION CONTROL</span>
+        <footer class="app-footer">
+            <span>SCUDERIA COMMAND</span>
+            <span>BUILT FOR RACE DAY</span>
+        </footer>
 
     </div>
-
-</footer>
-
-
-<!-- ============================= -->
-<!-- DATA -->
-<!-- ============================= -->
+</div>
 
 <script src="data/drivers.js"></script>
 <script src="data/teams.js"></script>
 <script src="data/sessions.js"></script>
-
-
-<!-- ============================= -->
-<!-- CORE SYSTEMS -->
-<!-- ============================= -->
-
 <script src="js/timing.js"></script>
 <script src="js/telemetry.js"></script>
+<script src="js/telemetryGraphs.js"></script>
 <script src="js/strategy.js"></script>
 <script src="js/weather.js"></script>
 <script src="js/racecontrol.js"></script>
 <script src="js/radio.js"></script>
 <script src="js/track.js"></script>
-
-<!-- SESSION MANAGER -->
 <script src="js/sessionManager.js"></script>
-
-<!-- LIVE DATA MANAGER -->
 <script src="js/liveDataManager.js"></script>
-
-<!-- MAIN APP -->
 <script src="js/app.js"></script>
 
 </body>
-
 </html>
